@@ -1,0 +1,31 @@
+public class MatchFinder {
+    public static String matchFound(String input1, String input2) {
+        String[] words = input2.split(":");
+        String output1 = "";
+        
+        for (String word : words) {
+            if (matches(input1, word)) {
+                output1 += (output1.isEmpty() ? "" : ":") + word.toUpperCase();
+            }
+        }
+        
+        return output1;
+    }
+
+    private static boolean matches(String pattern, String word) {
+        if (pattern.length() != word.length()) return false;
+        
+        for (int i = 0; i < pattern.length(); i++) {
+            if (pattern.charAt(i) != '_' && pattern.charAt(i) != word.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        String input1 = "c_t";
+        String input2 = "cat:cot:cut:bat:rat";
+        System.out.println(matchFound(input1, input2)); // Output: CAT:COT:CUT
+    }
+}
